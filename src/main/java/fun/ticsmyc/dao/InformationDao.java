@@ -89,6 +89,7 @@ public class InformationDao {
             }
             List<AreaStat.CitiesBean> cityList =areaStat.getCities();
             for(AreaStat.CitiesBean city :cityList){
+                city.setProvinceName(areaStat.getProvinceName());
                 if(selectCity(city.getCityName()) != null){
                     int res=areaStatMapper.updateCity(city);
                     System.out.print(res+"  ");

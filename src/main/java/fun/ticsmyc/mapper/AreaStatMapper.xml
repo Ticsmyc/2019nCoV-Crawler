@@ -29,9 +29,9 @@
         select * from city where cityName=#{0}
     </select>
     <insert id="addCity">
-        insert into city(cityName,confirmedCount,suspectedCount,curedCount,deadCount)
+        insert into city(cityName,confirmedCount,suspectedCount,curedCount,deadCount,provinceName)
         values
-        (#{cityName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount})
+        (#{cityName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{provinceName})
     </insert>
     <update id="updateCity">
         update city SET

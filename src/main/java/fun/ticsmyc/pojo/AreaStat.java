@@ -119,6 +119,15 @@ public class AreaStat {
         private int suspectedCount;
         private int curedCount;
         private int deadCount;
+        private String provinceName;
+
+        public String getProvinceName() {
+            return provinceName;
+        }
+
+        public void setProvinceName(String provinceName) {
+            this.provinceName = provinceName;
+        }
 
         public String getCityName() {
             return cityName;
