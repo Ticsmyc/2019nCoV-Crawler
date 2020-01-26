@@ -7,20 +7,21 @@
 
 <configuration>
 
-
+    <properties resource="dao.properties" />
     <typeAliases>
         <package name="fun.ticsmyc.pojo"/>
     </typeAliases>
+
     <environments default="default">
         <!-- 声明可以使用的环境 -->
         <environment id="default">
             <!-- 使用原生JDBC事务 -->
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/2019ncov?serverTimezone=GMT%2B8&amp;useSSL=false"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="${datasource.driver}"/>
+                <property name="url" value="${dataSource.url}"/>
+                <property name="username" value="${dataSource.username}"/>
+                <property name="password" value="${dataSource.password}"/>
             </dataSource>
         </environment>
 
