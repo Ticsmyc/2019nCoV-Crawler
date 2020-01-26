@@ -63,9 +63,14 @@ public class InformationDao {
      */
     public static void insertStatistics(Statistics statistics){
         StatisticsMapper statisticsMapper=session.getMapper(StatisticsMapper.class);
-        int res = statisticsMapper.addStatistics(statistics);
-        System.out.println(res);
-        session.commit();
+        if(statisticsMapper.selectStatistics(statistics.getModifyTime())==null){
+            int res = statisticsMapper.addStatistics(statistics);
+            System.out.println(res);
+            session.commit();
+        }else{
+            System.out.println(0);
+        }
+
     }
 
     /**

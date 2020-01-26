@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface StatisticsMapper {
 
-
+    Statistics selectStatistics(long modifyTime);
 
     int addStatistics(Statistics statistics);
 }

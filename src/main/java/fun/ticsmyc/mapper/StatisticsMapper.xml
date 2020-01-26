@@ -14,4 +14,7 @@
          #{deleted}, #{countRemark}, #{virus}, #{remark1}, #{remark2}, #{remark3}, #{remark4}, #{remark5},#{generalRemark});
     </insert>
 
+    <select id="selectStatistics" resultType="Statistics">
+        select * from statistics where modifyTime=#{0}
+    </select>
 </mapper>
