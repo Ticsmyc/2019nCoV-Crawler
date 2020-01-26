@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="fun.ticsmyc.mapper.TimeLineMapper">
+
+    <select id="selAll" resultType="TimeLine">
+        select * from timeline
+    </select>
+
+    <insert id="addTimeLine" parameterType="TimeLine">
+        insert IGNORE into timeline
+        (id,pubDate,pubDateStr,title,summary,infoSource,sourceUrl,provinceId,provinceName,createTime,modifyTime)
+        VALUES
+        (#{id},#{pubDate},#{pubDateStr},#{title},#{summary},#{infoSource},#{sourceUrl},#{provinceId},#{provinceName},#{createTime},#{modifyTime})
+
+    </insert>
+</mapper>
