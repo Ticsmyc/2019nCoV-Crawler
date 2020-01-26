@@ -55,7 +55,17 @@
 
   <build>
 
-
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <!-- <version>3.7</version> 默认用最新的-->
+        <configuration>
+          <source>12</source>
+          <target>12</target>
+        </configuration>
+      </plugin>
+    </plugins>
     <resources>
       <resource>
         <directory>${basedir}/src/main/java</directory>

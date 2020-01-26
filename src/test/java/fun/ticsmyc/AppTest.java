@@ -32,5 +32,7 @@ public class AppTest
 
         //数据持久化
         InformationDao.insertTimeLine(timeLineList);
+        InformationDao.insertStatistics(statisticsInformation);
+        InformationDao.insertProvince(areaStatList);
     }
 }

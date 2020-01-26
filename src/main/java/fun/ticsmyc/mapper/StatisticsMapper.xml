@@ -5,6 +5,13 @@
 
 <mapper namespace="fun.ticsmyc.mapper.StatisticsMapper">
 
-    
+    <insert id="addStatistics" >
+        INSERT INTO
+        statistics (id,createTime,modifyTime,infectSource,passWay,imgUrl,dailyPic,summary,deleted,countRemark,virus,
+        remark1,remark2,remark3,remark4,remark5,generalRemark)
+        VALUES
+        (#{id} ,#{createTime}, #{modifyTime}, #{infectSource}, #{passWay}, #{imgUrl}, #{dailyPic}, #{summary},
+         #{deleted}, #{countRemark}, #{virus}, #{remark1}, #{remark2}, #{remark3}, #{remark4}, #{remark5},#{generalRemark});
+    </insert>
 
 </mapper>
