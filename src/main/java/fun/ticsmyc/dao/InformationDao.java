@@ -113,6 +113,11 @@ public class InformationDao {
         return province;
     }
 
+    /**
+     * 查询某市信息
+     * @param cityName
+     * @return
+     */
     public static AreaStat.CitiesBean selectCity(String cityName){
         AreaStatMapper areaStatMapper = session.getMapper(AreaStatMapper.class);
         AreaStat.CitiesBean city =areaStatMapper.selCity(cityName);

@@ -12,7 +12,17 @@ import java.util.List;
  */
 public interface StatisticsMapper {
 
+    /**
+     * 根据修改时间查询一条数据
+     * @param modifyTime
+     * @return
+     */
     Statistics selectStatistics(long modifyTime);
 
+    /**
+     * 添加新的总体数据
+     * @param statistics
+     * @return
+     */
     int addStatistics(Statistics statistics);
 }
