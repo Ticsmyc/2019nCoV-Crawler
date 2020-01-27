@@ -2,6 +2,7 @@ package fun.ticsmyc.pojo;
 
 
 import java.util.Date;
+import java.util.Objects;
 
 
 public class Statistics {
@@ -44,9 +45,30 @@ public class Statistics {
     private String remark4;
     private String remark5;
     private String generalRemark;
+    private int confirmedCount;
+    private int suspectedCount;
+    private int curedCount;
+    private int deadCount;
+
 
     public Statistics() {
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Statistics that = (Statistics) o;
+        return confirmedCount == that.confirmedCount &&
+                suspectedCount == that.suspectedCount &&
+                curedCount == that.curedCount &&
+                deadCount == that.deadCount;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, createTime, modifyTime, infectSource, passWay, imgUrl, dailyPic, summary, deleted, countRemark, virus, remark1, remark2, remark3, remark4, remark5, generalRemark, confirmedCount, suspectedCount, curedCount, deadCount);
     }
 
     @Override
@@ -69,9 +91,44 @@ public class Statistics {
                 ", remark4='" + remark4 + '\'' +
                 ", remark5='" + remark5 + '\'' +
                 ", generalRemark='" + generalRemark + '\'' +
+                ", confirmedCount=" + confirmedCount +
+                ", suspectedCount=" + suspectedCount +
+                ", curedCount=" + curedCount +
+                ", deadCount=" + deadCount +
                 '}';
     }
 
+    public int getConfirmedCount() {
+        return confirmedCount;
+    }
+
+    public void setConfirmedCount(int confirmedCount) {
+        this.confirmedCount = confirmedCount;
+    }
+
+    public int getSuspectedCount() {
+        return suspectedCount;
+    }
+
+    public void setSuspectedCount(int suspectedCount) {
+        this.suspectedCount = suspectedCount;
+    }
+
+    public int getCuredCount() {
+        return curedCount;
+    }
+
+    public void setCuredCount(int curedCount) {
+        this.curedCount = curedCount;
+    }
+
+    public int getDeadCount() {
+        return deadCount;
+    }
+
+    public void setDeadCount(int deadCount) {
+        this.deadCount = deadCount;
+    }
 
     public int getId() {
         return id;

@@ -78,10 +78,12 @@ public class InformationDao {
 
         //数据库中最新的一条statistics数据
         Statistics oldStatistics = statisticsMapper.selectStatistics();
-        if(oldStatistics.getCountRemark().equals(statistics.getCountRemark()) ||statistics.getCountRemark().length()==0){
+        if(oldStatistics.equals(statistics)){
             logger.info(0+"");
             return null;
         }else{
+            statistics.setCountRemark("确诊 "+statistics.getConfirmedCount()+" 例，疑似 "+statistics.getSuspectedCount()+
+                    " 例 死亡 "+statistics.getDeadCount()+" 例，治愈 "+statistics.getCuredCount()+" 例");
             int res = statisticsMapper.addStatistics(statistics);
             logger.info(res+"");
             session.commit();
@@ -113,7 +115,7 @@ public class InformationDao {
                     int res=areaStatMapper.addProvince(areaStat);
                     log.append("+M"+res+"  ");
                     provinceNews.append("变动："+areaStat.getProvinceName()+"<br/>");
-                    provinceNews.append(getNumber(areaStat)+"<br>");
+                    provinceNews.append(getNumber(areaStat));
                     provinceNews.append(getNumberChange(oldAreaStat,areaStat)+"<br><br>");
                 }
             }else{
