@@ -6,37 +6,25 @@
 <mapper namespace="fun.ticsmyc.mapper.AreaStatMapper">
 
     <select id="selProvince" resultType="AreaStat">
-        select * from province where provinceName=#{0}
+        select * from province where provinceName=#{0} ORDER BY modifyTime DESC limit 1
     </select>
 
     <insert id="addProvince">
         insert into
-        province(provinceName,provinceShortName,confirmedCount,suspectedCount,curedCount,deadCount,`comment`)
+        province(provinceName,provinceShortName,confirmedCount,suspectedCount,curedCount,deadCount,`comment`,modifyTime)
         values
-        (#{provinceName},#{provinceShortName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{comment})
+        (#{provinceName},#{provinceShortName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{comment},#{modifyTime})
     </insert>
 
-    <update id="updateProvince">
-        UPDATE province SET
-        confirmedCount=#{confirmedCount},suspectedCount=#{suspectedCount},curedCount=#{curedCount},
-        deadCount=#{deadCount},comment=#{comment}
-        WHERE
-        provinceName=#{provinceName}
-    </update>
 
 
     <select id="selCity" resultType="fun.ticsmyc.pojo.AreaStat$CitiesBean">
-        select * from city where cityName=#{0}
+        select * from city where cityName=#{0} ORDER BY modifyTime DESC limit 1
     </select>
     <insert id="addCity">
-        insert into city(cityName,confirmedCount,suspectedCount,curedCount,deadCount,provinceName)
+        insert into city(cityName,confirmedCount,suspectedCount,curedCount,deadCount,provinceName,modifyTime)
         values
-        (#{cityName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{provinceName})
+        (#{cityName},#{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{provinceName},#{modifyTime})
     </insert>
-    <update id="updateCity">
-        update city SET
-        confirmedCount=#{confirmedCount},suspectedCount=#{suspectedCount},curedCount=#{curedCount},deadCount=#{deadCount}
-        WHERE
-        cityName=#{cityName}
-    </update>
+
 </mapper>

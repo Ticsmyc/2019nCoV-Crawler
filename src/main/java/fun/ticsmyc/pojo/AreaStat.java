@@ -2,7 +2,7 @@ package fun.ticsmyc.pojo;
 
 
 import java.util.List;
-
+import java.util.Objects;
 
 
 public class AreaStat {
@@ -26,19 +26,14 @@ public class AreaStat {
     private int deadCount;
     private String comment;
     private List<CitiesBean> cities;
+    private long modifyTime;
 
-    @Override
-    public String toString() {
-        return "AreaStat{" +
-                "provinceName='" + provinceName + '\'' +
-                ", provinceShortName='" + provinceShortName + '\'' +
-                ", confirmedCount=" + confirmedCount +
-                ", suspectedCount=" + suspectedCount +
-                ", curedCount=" + curedCount +
-                ", deadCount=" + deadCount +
-                ", comment='" + comment + '\'' +
-                ", cities=" + cities +
-                '}';
+    public long getModifyTime() {
+        return modifyTime;
+    }
+
+    public void setModifyTime(long modifyTime) {
+        this.modifyTime = modifyTime;
     }
 
     public String getProvinceName() {
@@ -101,10 +96,44 @@ public class AreaStat {
         return cities;
     }
 
+
+
     public void setCities(List<CitiesBean> cities) {
         this.cities = cities;
     }
 
+    /**
+     * 比较关键数字即可
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AreaStat areaStat = (AreaStat) o;
+        return confirmedCount == areaStat.confirmedCount &&
+                suspectedCount == areaStat.suspectedCount &&
+                curedCount == areaStat.curedCount &&
+                deadCount == areaStat.deadCount;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "AreaStat{" +
+                "provinceName='" + provinceName + '\'' +
+                ", provinceShortName='" + provinceShortName + '\'' +
+                ", confirmedCount=" + confirmedCount +
+                ", suspectedCount=" + suspectedCount +
+                ", curedCount=" + curedCount +
+                ", deadCount=" + deadCount +
+                ", comment='" + comment + '\'' +
+                ", cities=" + cities +
+                ", modifyTime=" + modifyTime +
+                '}';
+    }
     public static class CitiesBean {
         /**
          * cityName : 武汉
@@ -120,6 +149,7 @@ public class AreaStat {
         private int curedCount;
         private int deadCount;
         private String provinceName;
+        private long modifyTime;
 
         public String getProvinceName() {
             return provinceName;
@@ -169,6 +199,14 @@ public class AreaStat {
             this.deadCount = deadCount;
         }
 
+        public long getModifyTime() {
+            return modifyTime;
+        }
+
+        public void setModifyTime(long modifyTime) {
+            this.modifyTime = modifyTime;
+        }
+
         @Override
         public String toString() {
             return "CitiesBean{" +
@@ -177,7 +215,22 @@ public class AreaStat {
                     ", suspectedCount=" + suspectedCount +
                     ", curedCount=" + curedCount +
                     ", deadCount=" + deadCount +
+                    ", provinceName='" + provinceName + '\'' +
+                    ", modifyTime=" + modifyTime +
                     '}';
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            CitiesBean that = (CitiesBean) o;
+            return confirmedCount == that.confirmedCount &&
+                    suspectedCount == that.suspectedCount &&
+                    curedCount == that.curedCount &&
+                    deadCount == that.deadCount;
+        }
+
+
     }
 }

@@ -23,9 +23,9 @@ import java.util.List;
  */
 public class InformationDao {
 
-    private static SqlSession session;
+    private  SqlSession session;
 
-    static{
+    public InformationDao() {
         InputStream is = null;
         try {
             is = Resources.getResourceAsStream("mybatis.xml");
@@ -38,7 +38,8 @@ public class InformationDao {
         session = factory.openSession();
     }
 
-    public static void destory(){
+
+    public void destory(){
         session.close();
     }
 
@@ -47,7 +48,7 @@ public class InformationDao {
      * 添加实时消息
      * @param timeLineList
      */
-    public static void insertTimeLine(List<TimeLine> timeLineList){
+    public  void insertTimeLine(List<TimeLine> timeLineList){
         TimeLineMapper timeLineMapper = session.getMapper(TimeLineMapper.class);
         for(TimeLine timeLine : timeLineList){
             int res =timeLineMapper.addTimeLine(timeLine);
@@ -61,14 +62,16 @@ public class InformationDao {
      * 添加总体数据
      * @param statistics
      */
-    public static void insertStatistics(Statistics statistics){
+    public boolean insertStatistics(Statistics statistics){
         StatisticsMapper statisticsMapper=session.getMapper(StatisticsMapper.class);
         if(statisticsMapper.selectStatistics(statistics.getModifyTime())==null){
             int res = statisticsMapper.addStatistics(statistics);
             System.out.println(res);
             session.commit();
+            return true;
         }else{
             System.out.println(0);
+            return false;
         }
 
     }
@@ -77,25 +80,45 @@ public class InformationDao {
      * 添加各省信息
      * @param areaStatsList
      */
-    public static void insertProvince(List<AreaStat> areaStatsList){
+    public  void insertProvince(List<AreaStat> areaStatsList){
         AreaStatMapper areaStatMapper = session.getMapper(AreaStatMapper.class);
         for(AreaStat areaStat : areaStatsList){
-            if(selectProvince(areaStat.getProvinceName()) != null ){
-                int res=areaStatMapper.updateProvince(areaStat);
-                System.out.print(res+"  ");
+            AreaStat oldAreaStat =selectProvince(areaStat.getProvinceName());
+            if(oldAreaStat!= null ){
+                //库中已经有了这个省份
+                if(areaStat.equals(oldAreaStat)){
+                    //数据一致 不添加
+                    System.out.print("-E0"+"  ");
+                }else{
+                    areaStat.setModifyTime( System.currentTimeMillis()/1000);
+                    int res=areaStatMapper.addProvince(areaStat);
+                    System.out.print("-M"+res+"  ");
+                }
             }else{
+                //新增省份
+                areaStat.setModifyTime( System.currentTimeMillis()/1000);
                 int res = areaStatMapper.addProvince(areaStat);
-                System.out.print(res+"  ");
+                System.out.print("-N"+res+"  ");
             }
             List<AreaStat.CitiesBean> cityList =areaStat.getCities();
             for(AreaStat.CitiesBean city :cityList){
                 city.setProvinceName(areaStat.getProvinceName());
-                if(selectCity(city.getCityName()) != null){
-                    int res=areaStatMapper.updateCity(city);
-                    System.out.print(res+"  ");
+                AreaStat.CitiesBean oldCity = selectCity(city.getCityName());
+                if(oldCity!= null){
+                    //已有该城
+                    if(oldCity.equals(city)){
+                        //数据一致
+                        System.out.print("E0"+"  ");
+                    }else{
+                        city.setModifyTime(System.currentTimeMillis()/1000);
+                        int res=areaStatMapper.addCity(city);
+                        System.out.print("M"+res+"  ");
+                    }
                 }else{
+                    //新增城市
+                    city.setModifyTime(System.currentTimeMillis()/1000);
                     int res = areaStatMapper.addCity(city);
-                    System.out.print(res+"  ");
+                    System.out.print("N"+res+"  ");
                 }
             }
         }
@@ -108,7 +131,7 @@ public class InformationDao {
      * @param provinceName
      * @return
      */
-    public static AreaStat selectProvince(String provinceName){
+    public  AreaStat selectProvince(String provinceName){
         AreaStatMapper areaStatMapper = session.getMapper(AreaStatMapper.class);
         AreaStat province =areaStatMapper.selProvince(provinceName);
         return province;
@@ -119,7 +142,7 @@ public class InformationDao {
      * @param cityName
      * @return
      */
-    public static AreaStat.CitiesBean selectCity(String cityName){
+    public  AreaStat.CitiesBean selectCity(String cityName){
         AreaStatMapper areaStatMapper = session.getMapper(AreaStatMapper.class);
         AreaStat.CitiesBean city =areaStatMapper.selCity(cityName);
         return city;

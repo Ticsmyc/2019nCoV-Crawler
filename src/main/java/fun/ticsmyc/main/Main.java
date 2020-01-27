@@ -26,10 +26,12 @@ public class Main {
             public void run() {
                 fffffuck("TimerTask");
             }
-        }, 1000,600000);
+        }, 1000,10000);
     }
 
     public static void fffffuck(String timerTask){
+
+        InformationDao informationDao = new InformationDao();
         //获取json数据
         Crawler.timelineServiceInformation= Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE,"id",Crawler.TIME_LINE_ATTRIBUTE);
         Crawler.areaInformation=Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE,"id",Crawler.AREA_INFORMATION_ATTRIBUTE);
@@ -42,8 +44,12 @@ public class Main {
         List<AreaStat> areaStatList = Parse.parseAreaInformation(Crawler.areaInformation);
 
         //数据持久化
-        InformationDao.insertTimeLine(timeLineList);
-        InformationDao.insertStatistics(statisticsInformation);
-        InformationDao.insertProvince(areaStatList);
+        informationDao.insertTimeLine(timeLineList);
+        if (informationDao.insertStatistics(statisticsInformation)){
+            //如果总数据没有变，各省数据就不需要更新了
+            informationDao.insertProvince(areaStatList);
+        }
+
+        informationDao.destory();
     }
 }
