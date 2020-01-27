@@ -58,7 +58,7 @@ public class InformationDao {
             int res =timeLineMapper.addTimeLine(timeLine);
             if(res ==1){
                 //新消息
-                timeLineNews.append(timeLine.getProvinceName() +"<br>"+timeLine.getSummary()+"<br><br>");
+                timeLineNews.append(timeLine.getProvinceName() +"<br>"+timeLine.getTitle()+"<br>"+timeLine.getSummary()+"<br><br>");
             }
             log.append(res+" ");
         }
@@ -85,7 +85,7 @@ public class InformationDao {
             int res = statisticsMapper.addStatistics(statistics);
             logger.info(res+"");
             session.commit();
-            statisticsNews.append(statistics.getCountRemark()+"<br/>");
+            statisticsNews.append(statistics.getCountRemark()+"<br/><br/>");
             return statisticsNews.toString();
         }
 
@@ -114,14 +114,14 @@ public class InformationDao {
                     log.append("+M"+res+"  ");
                     provinceNews.append("变动："+areaStat.getProvinceName()+"<br/>");
                     provinceNews.append(getNumber(areaStat)+"<br>");
-                    provinceNews.append(getNumberChange(oldAreaStat,areaStat)+"<br>");
+                    provinceNews.append(getNumberChange(oldAreaStat,areaStat)+"<br><br>");
                 }
             }else{
                 //新增省份
                 areaStat.setModifyTime( System.currentTimeMillis()/1000);
                 int res = areaStatMapper.addProvince(areaStat);
                 provinceNews.append("新增："+areaStat.getProvinceName()+"<br/>");
-                provinceNews.append(getNumber(areaStat)+"<br>");
+                provinceNews.append(getNumber(areaStat)+"<br><br>");
                 log.append("+N"+res+"  ");
             }
             List<AreaStat.CitiesBean> cityList =areaStat.getCities();
