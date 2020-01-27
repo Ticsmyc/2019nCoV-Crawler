@@ -75,16 +75,20 @@ public class InformationDao {
         StringBuilder statisticsNews = new StringBuilder();
 
         StatisticsMapper statisticsMapper=session.getMapper(StatisticsMapper.class);
-        if(statisticsMapper.selectStatistics(statistics.getModifyTime())==null){
+
+        //数据库中最新的一条statistics数据
+        Statistics oldStatistics = statisticsMapper.selectStatistics();
+        if(oldStatistics.getCountRemark().equals(statistics.getCountRemark())){
+            logger.info(0+"");
+            return null;
+        }else{
             int res = statisticsMapper.addStatistics(statistics);
             logger.info(res+"");
             session.commit();
             statisticsNews.append(statistics.getCountRemark()+"<br/>");
             return statisticsNews.toString();
-        }else{
-            logger.info(0+"");
-            return null;
         }
+
 
     }
 
@@ -109,6 +113,7 @@ public class InformationDao {
                     int res=areaStatMapper.addProvince(areaStat);
                     log.append("+M"+res+"  ");
                     provinceNews.append("变动："+areaStat.getProvinceName()+"<br/>");
+                    provinceNews.append(getNumber(areaStat)+"<br>");
                     provinceNews.append(getNumberChange(oldAreaStat,areaStat)+"<br>");
                 }
             }else{

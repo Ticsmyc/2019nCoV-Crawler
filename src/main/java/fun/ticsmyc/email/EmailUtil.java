@@ -40,7 +40,6 @@ public class EmailUtil {
                 return new PasswordAuthentication("qq邮箱","QQ邮箱16位授权码");
             }
         });
-
         //开启debug模式
         session.setDebug(true);
         //获取连接对象

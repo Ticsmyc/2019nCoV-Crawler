@@ -15,6 +15,6 @@
     </insert>
 
     <select id="selectStatistics" resultType="Statistics">
-        select * from statistics where modifyTime=#{0}
+        select * from statistics ORDER BY modifyTime DESC limit 1
     </select>
 </mapper>

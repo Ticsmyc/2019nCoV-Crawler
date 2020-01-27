@@ -13,11 +13,10 @@ import java.util.List;
 public interface StatisticsMapper {
 
     /**
-     * 根据修改时间查询一条数据
-     * @param modifyTime
+     * 查询最新一条statistics数据
      * @return
      */
-    Statistics selectStatistics(long modifyTime);
+    Statistics selectStatistics();
 
     /**
      * 添加新的总体数据
