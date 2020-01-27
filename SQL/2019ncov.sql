@@ -11,7 +11,7 @@
  Target Server Version : 80019
  File Encoding         : 65001
 
- Date: 27/01/2020 13:17:33
+ Date: 28/01/2020 01:10:44
 */
 
 SET NAMES utf8mb4;
@@ -67,7 +67,11 @@ CREATE TABLE `statistics`  (
   `remark3` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `remark4` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `remark5` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `generalRemark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL
+  `generalRemark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `confirmedCount` int(0) NULL DEFAULT NULL,
+  `suspectedCount` int(0) NULL DEFAULT NULL,
+  `curedCount` int(0) NULL DEFAULT NULL,
+  `deadCount` int(0) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
