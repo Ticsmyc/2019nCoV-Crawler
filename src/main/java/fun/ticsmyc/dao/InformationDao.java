@@ -50,31 +50,40 @@ public class InformationDao {
      * 添加实时消息
      * @param timeLineList
      */
-    public  void insertTimeLine(List<TimeLine> timeLineList){
+    public String insertTimeLine(List<TimeLine> timeLineList){
+        StringBuilder timeLineNews = new StringBuilder();
         StringBuilder log =new StringBuilder();
         TimeLineMapper timeLineMapper = session.getMapper(TimeLineMapper.class);
         for(TimeLine timeLine : timeLineList){
             int res =timeLineMapper.addTimeLine(timeLine);
+            if(res ==1){
+                //新消息
+                timeLineNews.append(timeLine.getProvinceName() +"<br>"+timeLine.getSummary()+"<br><br>");
+            }
             log.append(res+" ");
         }
         logger.info(log.toString());
         session.commit();
+        return timeLineNews.toString();
     }
 
     /**
      * 添加总体数据
      * @param statistics
      */
-    public boolean insertStatistics(Statistics statistics){
+    public String insertStatistics(Statistics statistics){
+        StringBuilder statisticsNews = new StringBuilder();
+
         StatisticsMapper statisticsMapper=session.getMapper(StatisticsMapper.class);
         if(statisticsMapper.selectStatistics(statistics.getModifyTime())==null){
             int res = statisticsMapper.addStatistics(statistics);
             logger.info(res+"");
             session.commit();
-            return true;
+            statisticsNews.append(statistics.getCountRemark()+"<br/>");
+            return statisticsNews.toString();
         }else{
             logger.info(0+"");
-            return false;
+            return null;
         }
 
     }
@@ -83,8 +92,10 @@ public class InformationDao {
      * 添加各省信息
      * @param areaStatsList
      */
-    public  void insertProvince(List<AreaStat> areaStatsList){
+    public  String insertProvince(List<AreaStat> areaStatsList){
+        StringBuilder provinceNews = new StringBuilder();
         StringBuilder log = new StringBuilder();
+
         AreaStatMapper areaStatMapper = session.getMapper(AreaStatMapper.class);
         for(AreaStat areaStat : areaStatsList){
             AreaStat oldAreaStat =selectProvince(areaStat.getProvinceName());
@@ -97,11 +108,15 @@ public class InformationDao {
                     areaStat.setModifyTime( System.currentTimeMillis()/1000);
                     int res=areaStatMapper.addProvince(areaStat);
                     log.append("+M"+res+"  ");
+                    provinceNews.append("变动："+areaStat.getProvinceName()+"<br/>");
+                    provinceNews.append(getNumberChange(oldAreaStat,areaStat)+"<br>");
                 }
             }else{
                 //新增省份
                 areaStat.setModifyTime( System.currentTimeMillis()/1000);
                 int res = areaStatMapper.addProvince(areaStat);
+                provinceNews.append("新增："+areaStat.getProvinceName()+"<br/>");
+                provinceNews.append(getNumber(areaStat)+"<br>");
                 log.append("+N"+res+"  ");
             }
             List<AreaStat.CitiesBean> cityList =areaStat.getCities();
@@ -128,6 +143,29 @@ public class InformationDao {
         }
         logger.info(log.toString());
         session.commit();
+
+        return provinceNews.toString();
+    }
+
+    public String getNumberChange(AreaStat oldAreaStat,AreaStat newAreaStat){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("确诊人数变化："+(newAreaStat.getConfirmedCount()-oldAreaStat.getConfirmedCount())+"<br>");
+        sb.append("死亡人数变化："+(newAreaStat.getDeadCount()-oldAreaStat.getDeadCount())+"<br>");
+        sb.append("治愈人数变化："+(newAreaStat.getCuredCount()-oldAreaStat.getCuredCount())+"<br>");
+
+        return sb.toString();
+
+    }
+    public String getNumber(AreaStat areaStat){
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("确诊人数："+areaStat.getConfirmedCount()+"<br>");
+        sb.append("死亡人数："+areaStat.getDeadCount()+"<br>");
+        sb.append("治愈人数："+areaStat.getCuredCount()+"<br>");
+
+        return sb.toString();
+
     }
 
     /**

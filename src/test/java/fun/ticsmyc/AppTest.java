@@ -2,16 +2,18 @@ package fun.ticsmyc;
 
 import static org.junit.Assert.assertTrue;
 
-import fun.ticsmyc.crawler.Crawler;
-import fun.ticsmyc.crawler.Parse;
-import fun.ticsmyc.crawler.Tools;
-import fun.ticsmyc.dao.InformationDao;
-import fun.ticsmyc.pojo.AreaStat;
-import fun.ticsmyc.pojo.Statistics;
-import fun.ticsmyc.pojo.TimeLine;
+import fun.ticsmyc.service.InformationService;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.List;
+import java.util.Properties;
+import java.util.ResourceBundle;
 
 
 public class AppTest 
@@ -19,29 +21,25 @@ public class AppTest
 
     @Test
     public void test(){
-        InformationDao informationDao = new InformationDao();
-        //获取json数据
-        Crawler.timelineServiceInformation= Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE,"id",Crawler.TIME_LINE_ATTRIBUTE);
-        Crawler.areaInformation=Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE,"id",Crawler.AREA_INFORMATION_ATTRIBUTE);
-        Crawler.staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
 
-
-        //解析json数据
-        List<TimeLine> timeLineList = Parse.parseTimeLineInformation(Crawler.timelineServiceInformation);
-        Statistics statisticsInformation = Parse.parseStatisticsInformation(Crawler.staticInformation);
-        List<AreaStat> areaStatList = Parse.parseAreaInformation(Crawler.areaInformation);
-
-        //数据持久化
-        informationDao.insertTimeLine(timeLineList);
-        if (informationDao.insertStatistics(statisticsInformation)){
-            //如果总数据没有变，各省数据就不需要更新了
-            informationDao.insertProvince(areaStatList);
-        }
-        informationDao.destory();
+        InformationService informationService = new InformationService();
+        informationService.getNews();
     }
 
     @Test
     public void test2(){
         System.out.println(System.currentTimeMillis());
+    }
+
+    @Test
+    public void testEmail() throws IOException {
+        Properties properties = new Properties();
+        //可以用两种不同的流来加载配置文件
+        //properties.load(new BufferedReader(new FileReader(filePath)));
+        ClassLoader classLoader = getClass().getClassLoader();
+
+        properties.load(classLoader.getResource("email.properties").openStream());
+        System.out.println( properties.get("email.authCode"));
+
     }
 }

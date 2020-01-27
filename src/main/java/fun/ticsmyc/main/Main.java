@@ -7,6 +7,7 @@ import fun.ticsmyc.dao.InformationDao;
 import fun.ticsmyc.pojo.AreaStat;
 import fun.ticsmyc.pojo.Statistics;
 import fun.ticsmyc.pojo.TimeLine;
+import fun.ticsmyc.service.InformationService;
 
 import java.util.List;
 import java.util.Timer;
@@ -24,36 +25,15 @@ public class Main {
         new Timer("testTimer").schedule(new TimerTask() {
             @Override
             public void run() {
-                fffffuck("TimerTask");
+                fffffuck();
             }
         }, 1000,10000);
     }
 
-    public static void fffffuck(String timerTask){
+    public static void fffffuck(){
 
 
-        InformationDao informationDao = new InformationDao();
-
-        //获取HTML数据
-        Tools.getPageByJSoup(Crawler.URL);
-        //提取json数据
-        Crawler.timelineServiceInformation= Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE,"id",Crawler.TIME_LINE_ATTRIBUTE);
-        Crawler.areaInformation=Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE,"id",Crawler.AREA_INFORMATION_ATTRIBUTE);
-        Crawler.staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
-
-
-        //解析json数据
-        List<TimeLine> timeLineList = Parse.parseTimeLineInformation(Crawler.timelineServiceInformation);
-        Statistics statisticsInformation = Parse.parseStatisticsInformation(Crawler.staticInformation);
-        List<AreaStat> areaStatList = Parse.parseAreaInformation(Crawler.areaInformation);
-
-        //数据持久化
-        informationDao.insertTimeLine(timeLineList);
-        if (informationDao.insertStatistics(statisticsInformation)){
-            //如果总数据没有变，各省数据就不需要更新了
-            informationDao.insertProvince(areaStatList);
-        }
-
-        informationDao.destory();
+        InformationService informationService = new InformationService();
+        informationService.getNews();
     }
 }

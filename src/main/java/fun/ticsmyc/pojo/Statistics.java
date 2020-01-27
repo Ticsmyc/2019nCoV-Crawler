@@ -72,6 +72,7 @@ public class Statistics {
                 '}';
     }
 
+
     public int getId() {
         return id;
     }
