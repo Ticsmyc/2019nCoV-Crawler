@@ -21,7 +21,6 @@ public class AppTest
 
     @Test
     public void test(){
-
         InformationService informationService = new InformationService();
         informationService.getNews();
     }
@@ -40,6 +39,5 @@ public class AppTest
 
         properties.load(classLoader.getResource("email.properties").openStream());
         System.out.println( properties.get("email.authCode"));
-
     }
 }
