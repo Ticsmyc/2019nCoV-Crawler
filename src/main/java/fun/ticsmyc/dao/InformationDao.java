@@ -92,17 +92,17 @@ public class InformationDao {
                 //库中已经有了这个省份
                 if(areaStat.equals(oldAreaStat)){
                     //数据一致 不添加
-                    log.append("-E0"+"  ");
+                    log.append("+E0"+"  ");
                 }else{
                     areaStat.setModifyTime( System.currentTimeMillis()/1000);
                     int res=areaStatMapper.addProvince(areaStat);
-                    log.append("-M"+res+"  ");
+                    log.append("+M"+res+"  ");
                 }
             }else{
                 //新增省份
                 areaStat.setModifyTime( System.currentTimeMillis()/1000);
                 int res = areaStatMapper.addProvince(areaStat);
-                log.append("-N"+res+"  ");
+                log.append("+N"+res+"  ");
             }
             List<AreaStat.CitiesBean> cityList =areaStat.getCities();
             for(AreaStat.CitiesBean city :cityList){

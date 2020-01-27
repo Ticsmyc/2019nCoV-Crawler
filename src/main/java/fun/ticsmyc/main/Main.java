@@ -31,8 +31,12 @@ public class Main {
 
     public static void fffffuck(String timerTask){
 
+
         InformationDao informationDao = new InformationDao();
-        //获取json数据
+
+        //获取HTML数据
+        Tools.getPageByJSoup(Crawler.URL);
+        //提取json数据
         Crawler.timelineServiceInformation= Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE,"id",Crawler.TIME_LINE_ATTRIBUTE);
         Crawler.areaInformation=Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE,"id",Crawler.AREA_INFORMATION_ATTRIBUTE);
         Crawler.staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);

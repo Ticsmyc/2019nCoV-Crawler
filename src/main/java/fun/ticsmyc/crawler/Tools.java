@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
  */
 public class Tools {
 
-    private static Document page=Tools.getPageByJSoup(Crawler.URL);
+    public static Document page;
 
     /**
      * 正则匹配获取
@@ -44,14 +44,13 @@ public class Tools {
      * @param url
      * @return
      */
-    public static Document getPageByJSoup(String url) {
-        Document doc = null;
+    public static void getPageByJSoup(String url) {
         try {
-            doc = Jsoup.connect(url).get();
+            page = Jsoup.connect(url).get();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return doc;
+
     }
 
 }
