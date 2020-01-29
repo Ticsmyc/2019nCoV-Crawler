@@ -27,7 +27,7 @@ public class Main {
             public void run() {
                 fffffuck();
             }
-        }, 1000,10000);
+        }, 1000,600000);
     }
 
     public static void fffffuck(){

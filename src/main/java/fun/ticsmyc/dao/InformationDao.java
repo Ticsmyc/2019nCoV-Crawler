@@ -78,7 +78,7 @@ public class InformationDao {
 
         //数据库中最新的一条statistics数据
         Statistics oldStatistics = statisticsMapper.selectStatistics();
-        if(oldStatistics.equals(statistics)){
+        if(statistics.equals(oldStatistics)){
             logger.info(0+"");
             return null;
         }else{

@@ -83,13 +83,18 @@ public class InformationService {
 
             //邮件通知
             StringBuilder emailContent=new StringBuilder();
-            emailContent.append("----------------------新闻--------------------<br/>");
-            emailContent.append(timeLineNews);
-            emailContent.append("----------------------总人数-------------------<br/>");
-            emailContent.append(statisticsNews);
-            emailContent.append("---------------------各省变化-------------------<br/>");
-            emailContent.append(provinceNews);
-
+            if(timeLineNews.length()!=0){
+                emailContent.append("----------------------新闻--------------------<br/>");
+                emailContent.append(timeLineNews);
+            }
+            if(statisticsNews.length()!=0){
+                emailContent.append("----------------------总人数-------------------<br/>");
+                emailContent.append(statisticsNews);
+            }
+            if(provinceNews.length()!=0){
+                emailContent.append("---------------------各省变化-------------------<br/>");
+                emailContent.append(provinceNews);
+            }
             SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
                 for(String toUserEmail : toEmailList){
