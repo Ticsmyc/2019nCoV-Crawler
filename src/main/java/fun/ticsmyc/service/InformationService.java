@@ -105,8 +105,8 @@ public class InformationService {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            informationDao.destory();
-        }
 
+        }
+        informationDao.destory();
     }
 }
