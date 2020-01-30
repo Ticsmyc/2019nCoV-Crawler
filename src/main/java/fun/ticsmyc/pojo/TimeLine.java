@@ -1,6 +1,7 @@
 package fun.ticsmyc.pojo;
 
 
+import java.util.Objects;
 
 public class TimeLine {
 
@@ -107,6 +108,7 @@ public class TimeLine {
                 ", modifyTime=" + modifyTime +
                 '}';
     }
+
 
     public void setProvinceId(String provinceId) {
         this.provinceId = provinceId;

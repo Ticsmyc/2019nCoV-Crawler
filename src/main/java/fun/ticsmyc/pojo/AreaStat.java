@@ -118,7 +118,10 @@ public class AreaStat {
                 deadCount == areaStat.deadCount;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(provinceName, provinceShortName, confirmedCount, suspectedCount, curedCount, deadCount, comment, cities, modifyTime);
+    }
 
     @Override
     public String toString() {
@@ -231,6 +234,9 @@ public class AreaStat {
                     deadCount == that.deadCount;
         }
 
-
+        @Override
+        public int hashCode() {
+            return Objects.hash(cityName, confirmedCount, suspectedCount, curedCount, deadCount, provinceName, modifyTime);
+        }
     }
 }
