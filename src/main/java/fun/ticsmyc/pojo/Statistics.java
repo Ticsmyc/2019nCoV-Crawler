@@ -1,7 +1,6 @@
 package fun.ticsmyc.pojo;
 
 
-import java.util.Date;
 import java.util.Objects;
 
 
@@ -50,6 +49,52 @@ public class Statistics {
     private int curedCount;
     private int deadCount;
     private int seriousCount;
+
+    private int suspectedIncr;
+    private int confirmedIncr;
+    private int curedIncr;
+    private int deadIncr;
+    private int seriousIncr;
+
+    public int getSuspectedIncr() {
+        return suspectedIncr;
+    }
+
+    public void setSuspectedIncr(int suspectedIncr) {
+        this.suspectedIncr = suspectedIncr;
+    }
+
+    public int getConfirmedIncr() {
+        return confirmedIncr;
+    }
+
+    public void setConfirmedIncr(int confirmedIncr) {
+        this.confirmedIncr = confirmedIncr;
+    }
+
+    public int getCuredIncr() {
+        return curedIncr;
+    }
+
+    public void setCuredIncr(int curedIncr) {
+        this.curedIncr = curedIncr;
+    }
+
+    public int getDeadIncr() {
+        return deadIncr;
+    }
+
+    public void setDeadIncr(int deadIncr) {
+        this.deadIncr = deadIncr;
+    }
+
+    public int getSeriousIncr() {
+        return seriousIncr;
+    }
+
+    public void setSeriousIncr(int seriousIncr) {
+        this.seriousIncr = seriousIncr;
+    }
 
     public int getSeriousCount() {
         return seriousCount;
@@ -104,6 +149,11 @@ public class Statistics {
                 ", curedCount=" + curedCount +
                 ", deadCount=" + deadCount +
                 ", seriousCount=" + seriousCount +
+                ", suspectedIncr=" + suspectedIncr +
+                ", confirmedIncr=" + confirmedIncr +
+                ", curedIncr=" + curedIncr +
+                ", deadIncr=" + deadIncr +
+                ", seriousIncr=" + seriousIncr +
                 '}';
     }
 

@@ -82,12 +82,15 @@ public class InformationDao {
             logger.info(0+"");
             return null;
         }else{
-            statistics.setCountRemark("确诊 "+statistics.getConfirmedCount()+" 例，重症"+statistics.getSeriousCount()+
-                    " 例，疑似 "+statistics.getSuspectedCount()+ "例，死亡 "+statistics.getDeadCount()+" 例，治愈 "+statistics.getCuredCount()+" 例");
+            statistics.setCountRemark("确诊 "+statistics.getConfirmedCount()+"例，重症"+statistics.getSeriousCount()+
+                    "例，疑似 "+statistics.getSuspectedCount()+ "例，死亡 "+statistics.getDeadCount()+"例，治愈 "+statistics.getCuredCount()+"例");
             int res = statisticsMapper.addStatistics(statistics);
             logger.info(res+"");
             session.commit();
-            statisticsNews.append(statistics.getCountRemark()+"<br/><br/>");
+            String increaseMessage="较昨日增长: "+"<br/>确诊："+statistics.getConfirmedIncr()+"<br/>重症："+statistics.getSeriousIncr()+
+                    "<br/>疑似："+statistics.getSuspectedIncr()+"<br/>死亡："+statistics.getDeadIncr()+"<br/>治愈："+statistics.getCuredIncr();
+            statisticsNews.append(statistics.getCountRemark()+"<br/><br/>"+increaseMessage+"<br/><br/>");
+
             return statisticsNews.toString();
         }
 
