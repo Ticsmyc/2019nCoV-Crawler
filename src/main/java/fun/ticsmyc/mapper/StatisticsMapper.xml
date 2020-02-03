@@ -8,11 +8,11 @@
     <insert id="addStatistics" >
         INSERT INTO
         statistics (id,createTime,modifyTime,infectSource,passWay,imgUrl,dailyPic,summary,deleted,countRemark,virus,
-        remark1,remark2,remark3,remark4,remark5,generalRemark,confirmedCount,suspectedCount,curedCount,deadCount)
+        remark1,remark2,remark3,remark4,remark5,generalRemark,confirmedCount,suspectedCount,curedCount,deadCount,seriousCount)
         VALUES
         (#{id} ,#{createTime}, #{modifyTime}, #{infectSource}, #{passWay}, #{imgUrl}, #{dailyPic}, #{summary},
          #{deleted}, #{countRemark}, #{virus}, #{remark1}, #{remark2}, #{remark3}, #{remark4}, #{remark5},#{generalRemark},
-         #{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount});
+         #{confirmedCount},#{suspectedCount},#{curedCount},#{deadCount},#{seriousCount});
     </insert>
 
     <select id="selectStatistics" resultType="Statistics">

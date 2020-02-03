@@ -49,7 +49,15 @@ public class Statistics {
     private int suspectedCount;
     private int curedCount;
     private int deadCount;
+    private int seriousCount;
 
+    public int getSeriousCount() {
+        return seriousCount;
+    }
+
+    public void setSeriousCount(int seriousCount) {
+        this.seriousCount = seriousCount;
+    }
 
     public Statistics() {
 
@@ -95,6 +103,7 @@ public class Statistics {
                 ", suspectedCount=" + suspectedCount +
                 ", curedCount=" + curedCount +
                 ", deadCount=" + deadCount +
+                ", seriousCount=" + seriousCount +
                 '}';
     }
 
