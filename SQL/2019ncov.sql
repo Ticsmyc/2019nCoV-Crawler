@@ -11,7 +11,7 @@
  Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 03/02/2020 10:04:18
+ Date: 03/02/2020 12:45:23
 */
 
 SET NAMES utf8mb4;
@@ -57,9 +57,9 @@ CREATE TABLE `statistics`  (
   `infectSource` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `passWay` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `imgUrl` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `dailyPic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `deleted` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `dailyPic` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `summary` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `deleted` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `countRemark` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `virus` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `remark1` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
@@ -72,7 +72,12 @@ CREATE TABLE `statistics`  (
   `suspectedCount` int(11) NULL DEFAULT NULL,
   `curedCount` int(11) NULL DEFAULT NULL,
   `deadCount` int(11) NULL DEFAULT NULL,
-  `seriousCount` int(11) NULL DEFAULT NULL
+  `seriousCount` int(11) NULL DEFAULT NULL,
+  `suspectedIncr` int(11) NULL DEFAULT NULL,
+  `confirmedIncr` int(11) NULL DEFAULT NULL,
+  `curedIncr` int(11) NULL DEFAULT NULL,
+  `deadIncr` int(11) NULL DEFAULT NULL,
+  `seriousIncr` int(11) NULL DEFAULT NULL
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
