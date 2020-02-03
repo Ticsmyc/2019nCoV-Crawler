@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 /**
  * @author Ticsmyc
@@ -98,8 +97,10 @@ public class InformationService {
             SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
                 for(String toUserEmail : toEmailList){
-                    EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"),toUserEmail,dateFormat.format(new Date())+"疫情动态",emailContent.toString());
-                    Thread.sleep(5000);
+                    if(toUserEmail != ""){
+                        EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"),toUserEmail,dateFormat.format(new Date())+"疫情动态",emailContent.toString());
+                        Thread.sleep(5000);
+                    }
                 }
 
             } catch (Exception e) {
@@ -109,4 +110,6 @@ public class InformationService {
         }
         informationDao.destory();
     }
+
+
 }

@@ -1,15 +1,8 @@
 package fun.ticsmyc.main;
 
-import fun.ticsmyc.crawler.Crawler;
-import fun.ticsmyc.crawler.Parse;
-import fun.ticsmyc.crawler.Tools;
-import fun.ticsmyc.dao.InformationDao;
-import fun.ticsmyc.pojo.AreaStat;
-import fun.ticsmyc.pojo.Statistics;
-import fun.ticsmyc.pojo.TimeLine;
+
 import fun.ticsmyc.service.InformationService;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,8 +24,6 @@ public class Main {
     }
 
     public static void fffffuck(){
-
-
         InformationService informationService = new InformationService();
         informationService.getNews();
     }
