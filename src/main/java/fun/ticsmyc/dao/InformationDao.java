@@ -6,16 +6,16 @@ import fun.ticsmyc.mapper.TimeLineMapper;
 import fun.ticsmyc.pojo.AreaStat;
 import fun.ticsmyc.pojo.Statistics;
 import fun.ticsmyc.pojo.TimeLine;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 /**
  * @author Ticsmyc
@@ -25,14 +25,14 @@ import java.util.logging.Logger;
 public class InformationDao {
 
     private  SqlSession session;
-    private static final Logger logger = Logger.getLogger("InformationDao");
+    public static final Logger logger = Logger.getLogger(InformationDao.class);
 
     public InformationDao() {
         InputStream is = null;
         try {
             is = Resources.getResourceAsStream("mybatis.xml");
         } catch (IOException e) {
-            logger.info("mybatis.xml加载错误");
+            logger.error("mybatis.xml加载错误");
         }
         //使用工厂设计模式
         SqlSessionFactory factory =new SqlSessionFactoryBuilder().build(is);
@@ -42,7 +42,7 @@ public class InformationDao {
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                logger.debug("mybatis.xml输入流关闭错误");
             }
         }
     }

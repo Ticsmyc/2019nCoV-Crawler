@@ -6,7 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import fun.ticsmyc.pojo.AreaStat;
 import fun.ticsmyc.pojo.Statistics;
 import fun.ticsmyc.pojo.TimeLine;
-import org.junit.jupiter.api.Test;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class Parse {
 
+    private static Logger logger = Logger.getLogger(Parse.class);
     /**
      * 解析TimeLine的JSON数据
      * @param timelineServiceInformation
@@ -33,7 +34,7 @@ public class Parse {
             timeLine.setModifyTime(timeLine.getModifyTime()/1000);
             timeLine.setPubDate(timeLine.getPubDate()/1000);
             list.add(timeLine);
-            System.out.println(timeLine);
+            logger.info(timeLine);
         }
         return list;
     }
@@ -48,7 +49,7 @@ public class Parse {
         Statistics statistics = JSON.toJavaObject(jsonObj,Statistics.class);
         statistics.setCreateTime(statistics.getCreateTime()/1000);
         statistics.setModifyTime(statistics.getModifyTime()/1000);
-        System.out.println(statistics);
+        logger.info(statistics);
         return statistics;
     }
 
@@ -63,7 +64,7 @@ public class Parse {
         for(Object jsonObj : jsonArray){
             AreaStat areaStat = JSON.toJavaObject((JSON) jsonObj, AreaStat.class);
             list.add(areaStat);
-            System.out.println(areaStat);
+            logger.info(areaStat);
         }
         return list;
     }
