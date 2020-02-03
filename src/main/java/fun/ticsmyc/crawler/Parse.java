@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class Parse {
 
-    private static Logger logger = Logger.getLogger(Parse.class);
+    private static final Logger logger = Logger.getLogger(Parse.class);
     /**
      * 解析TimeLine的JSON数据
      * @param timelineServiceInformation

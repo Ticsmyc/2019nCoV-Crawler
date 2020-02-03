@@ -1,5 +1,6 @@
 package fun.ticsmyc.crawler;
 
+import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
  */
 public class Tools {
 
+    private static final Logger logger = Logger.getLogger(Tools.class);
 
     public static Document page;
 
@@ -49,7 +51,7 @@ public class Tools {
         try {
             page = Jsoup.connect(url).get();
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("jsoup获取页面失败");
         }
 
     }

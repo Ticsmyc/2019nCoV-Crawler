@@ -5,6 +5,7 @@ import com.sun.mail.util.MailSSLSocketFactory;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.security.GeneralSecurityException;
 import java.util.Properties;
 
 /**
@@ -20,7 +21,7 @@ public class EmailUtil {
      * @param subject 主题
      * @param comment 文本正文
      */
-    public static void sendEmail(String authCode,String fromEmail,String toUserEmail,String subject,String comment) throws Exception{
+    public static void sendEmail(String authCode,String fromEmail,String toUserEmail,String subject,String comment) throws GeneralSecurityException, MessagingException {
         //创建一个配置文件并保存
         Properties properties = new Properties();
         properties.setProperty("mail.host","smtp.qq.com");//QQ邮件服务器

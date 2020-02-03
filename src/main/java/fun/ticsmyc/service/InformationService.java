@@ -11,10 +11,12 @@ import fun.ticsmyc.pojo.TimeLine;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
+import javax.mail.MessagingException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.security.GeneralSecurityException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +29,7 @@ import java.util.Properties;
  * @date 2020-01-27 15:48
  */
 public class InformationService {
-    private Logger logger = Logger.getLogger(InformationService.class);
+    private final Logger logger = Logger.getLogger(InformationService.class);
 
     private InformationDao informationDao;
 
@@ -36,7 +38,6 @@ public class InformationService {
     }
 
     public void getNews(){
-        boolean sendEmail = false;
         //获取HTML数据
         Tools.getPageByJSoup(Crawler.URL);
 
@@ -69,7 +70,7 @@ public class InformationService {
         informationDao.destory();
     }
 
-    public void sendEmail(String timeLineNews,String provinceNews,String statisticsNews){
+    public void sendEmail(String timeLineNews,String provinceNews,String statisticsNews) {
         //读取收件人列表
         Properties properties = null;
         List<String> toEmailList = null;
@@ -114,7 +115,11 @@ public class InformationService {
                     }
                 }
             }
-        } catch (Exception e) {
+        } catch (InterruptedException e) {
+            logger.error("邮件发送失败");
+        } catch (GeneralSecurityException e) {
+            logger.error("邮件发送失败");
+        } catch (MessagingException e) {
             logger.error("邮件发送失败");
         }
     }
