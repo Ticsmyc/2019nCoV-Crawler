@@ -18,27 +18,7 @@ import java.util.Scanner;
 public class AppTest 
 {
 
-    @Test
-    public void test(){
-        InformationService informationService = new InformationService();
-        informationService.getNews();
-    }
 
-    @Test
-    public void test2(){
-        System.out.println(System.currentTimeMillis());
-    }
-
-    @Test
-    public void testEmail() throws IOException {
-        Properties properties = new Properties();
-        //可以用两种不同的流来加载配置文件
-        //properties.load(new BufferedReader(new FileReader(filePath)));
-        ClassLoader classLoader = getClass().getClassLoader();
-
-        properties.load(classLoader.getResource("email.properties").openStream());
-        System.out.println( properties.get("email.authCode"));
-    }
 
 
 }

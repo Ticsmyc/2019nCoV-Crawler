@@ -25,19 +25,26 @@ import java.util.logging.Logger;
 public class InformationDao {
 
     private  SqlSession session;
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private static final Logger logger = Logger.getLogger("InformationDao");
 
     public InformationDao() {
         InputStream is = null;
         try {
             is = Resources.getResourceAsStream("mybatis.xml");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.info("mybatis.xml加载错误");
         }
         //使用工厂设计模式
         SqlSessionFactory factory =new SqlSessionFactoryBuilder().build(is);
         //生产SqlSession
         session = factory.openSession();
+        if(is != null){
+            try {
+                is.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

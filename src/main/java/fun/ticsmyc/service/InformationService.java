@@ -52,11 +52,12 @@ public class InformationService {
 
         //数据持久化
 
-        String timeLineNews = informationDao.insertTimeLine(timeLineList);
-        String statisticsNews = informationDao.insertStatistics(statisticsInformation);
+        String timeLineNews =null;
         String provinceNews=null;
+        String statisticsNews = informationDao.insertStatistics(statisticsInformation);
         if (statisticsNews != null){
             //总数据发生变化，各省数据更新
+            timeLineNews = informationDao.insertTimeLine(timeLineList);
             provinceNews=informationDao.insertProvince(areaStatList);
             sendEmail=true;
 
@@ -82,7 +83,7 @@ public class InformationService {
 
             //邮件通知
             StringBuilder emailContent=new StringBuilder();
-            if(timeLineNews.length()!=0){
+            if(timeLineNews!=null && timeLineNews.length()!=0){
                 emailContent.append("----------------------新闻--------------------<br/>");
                 emailContent.append(timeLineNews);
             }
@@ -90,16 +91,18 @@ public class InformationService {
                 emailContent.append("----------------------总人数-------------------<br/>");
                 emailContent.append(statisticsNews);
             }
-            if(provinceNews.length()!=0){
+            if(provinceNews!= null && provinceNews.length()!=0){
                 emailContent.append("---------------------各省变化-------------------<br/>");
                 emailContent.append(provinceNews);
             }
             SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             try {
-                for(String toUserEmail : toEmailList){
-                    if(toUserEmail != ""){
-                        EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"),toUserEmail,dateFormat.format(new Date())+"疫情动态",emailContent.toString());
-                        Thread.sleep(5000);
+                if(toEmailList!= null){
+                    for(String toUserEmail : toEmailList){
+                        if(toUserEmail != ""){
+                            EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"),toUserEmail,dateFormat.format(new Date())+"疫情动态",emailContent.toString());
+                            Thread.sleep(5000);
+                        }
                     }
                 }
 
