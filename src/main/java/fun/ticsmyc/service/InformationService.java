@@ -48,6 +48,7 @@ public class InformationService {
 
         //解析json数据
         List<TimeLine> timeLineList = Parse.parseTimeLineInformation(Crawler.timelineServiceInformation);
+        System.out.println(Crawler.staticInformation);
         Statistics statisticsInformation = Parse.parseStatisticsInformation(Crawler.staticInformation);
         List<AreaStat> areaStatList = Parse.parseAreaInformation(Crawler.areaInformation);
 
