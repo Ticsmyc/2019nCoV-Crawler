@@ -23,7 +23,8 @@ public class Crawler {
     /**
      * 总数据
      */
-    public static final String STATIC_INFORMATION_REGEX_TEMPLATE="\\{(\"id\".*?)\\}";
+    public static final String STATIC_INFORMATION_REGEX_TEMPLATE_2="\\{(\"id\".*?)\\}\\]\\}";
+    public static final String STATIC_INFORMATION_REGEX_TEMPLATE_1="\\{(\"id\".*?)\\}";
     public static final String STATIC_INFORMATION_ATTRIBUTE="getStatisticsService";
 
 }

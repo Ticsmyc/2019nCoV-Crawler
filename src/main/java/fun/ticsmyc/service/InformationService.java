@@ -42,10 +42,18 @@ public class InformationService {
         Tools.getPageByJSoup(Crawler.URL);
 
         //提取static信息的json数据
-        String staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
 
+        String staticInformation=null;
         //解析static信息的json数据
-        Statistics statisticsInformation = Parse.parseStatisticsInformation(staticInformation);
+        Statistics statisticsInformation=null;
+        try{
+            staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
+            statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+        }catch(NullPointerException e ){
+            logger.error("static信息正则1匹配失败，切换正则2");
+            staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
+            statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+        }
 
         //数据持久化
         String timeLineNews =null;
