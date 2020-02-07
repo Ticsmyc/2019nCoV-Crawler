@@ -1,5 +1,6 @@
 package fun.ticsmyc.service;
 
+import com.alibaba.fastjson.JSONException;
 import fun.ticsmyc.crawler.Crawler;
 import fun.ticsmyc.crawler.Parse;
 import fun.ticsmyc.crawler.Tools;
@@ -49,7 +50,7 @@ public class InformationService {
         try{
             staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
             statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
-        }catch(NullPointerException e ){
+        }catch(JSONException e ){
             logger.error("static信息正则1匹配失败，切换正则2");
             staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
             statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
