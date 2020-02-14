@@ -1,17 +1,17 @@
 /*
  Navicat Premium Data Transfer
 
- Source Server         : 阿里云
+ Source Server         : 本地mysql
  Source Server Type    : MySQL
- Source Server Version : 50637
- Source Host           : 123.56.13.105:3306
+ Source Server Version : 50729
+ Source Host           : localhost:3306
  Source Schema         : 2019ncov
 
  Target Server Type    : MySQL
- Target Server Version : 50637
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 04/02/2020 12:57:15
+ Date: 14/02/2020 22:45:08
 */
 
 SET NAMES utf8mb4;
@@ -29,7 +29,7 @@ CREATE TABLE `city`  (
   `deadCount` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `provinceName` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `modifyTime` int(11) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for province
@@ -44,7 +44,7 @@ CREATE TABLE `province`  (
   `deadCount` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `comment` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `modifyTime` int(11) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for statistics
@@ -77,8 +77,10 @@ CREATE TABLE `statistics`  (
   `confirmedIncr` int(11) NULL DEFAULT NULL,
   `curedIncr` int(11) NULL DEFAULT NULL,
   `deadIncr` int(11) NULL DEFAULT NULL,
-  `seriousIncr` int(11) NULL DEFAULT NULL
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+  `seriousIncr` int(11) NULL DEFAULT NULL,
+  `currentConfirmedCount` int(11) NULL DEFAULT NULL COMMENT '现存确诊',
+  `currentConfirmedIncr` int(11) NULL DEFAULT NULL COMMENT '现存确诊新增'
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for timeline
@@ -97,6 +99,6 @@ CREATE TABLE `timeline`  (
   `createTime` int(11) NULL DEFAULT NULL,
   `modifyTime` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 SET FOREIGN_KEY_CHECKS = 1;

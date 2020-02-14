@@ -56,6 +56,25 @@ public class Statistics {
     private int deadIncr;
     private int seriousIncr;
 
+    private int currentConfirmedCount;
+    private int currentConfirmedIncr;
+
+    public int getCurrentConfirmedCount() {
+        return currentConfirmedCount;
+    }
+
+    public void setCurrentConfirmedCount(int currentConfirmedCount) {
+        this.currentConfirmedCount = currentConfirmedCount;
+    }
+
+    public int getCurrentConfirmedIncr() {
+        return currentConfirmedIncr;
+    }
+
+    public void setCurrentConfirmedIncr(int currentConfirmedIncr) {
+        this.currentConfirmedIncr = currentConfirmedIncr;
+    }
+
     public int getSuspectedIncr() {
         return suspectedIncr;
     }
@@ -116,7 +135,10 @@ public class Statistics {
         return confirmedCount == that.confirmedCount &&
                 suspectedCount == that.suspectedCount &&
                 curedCount == that.curedCount &&
-                deadCount == that.deadCount;
+                deadCount == that.deadCount &&
+                seriousCount ==that.seriousCount &&
+                currentConfirmedCount == that.currentConfirmedCount
+                ;
     }
 
     @Override
