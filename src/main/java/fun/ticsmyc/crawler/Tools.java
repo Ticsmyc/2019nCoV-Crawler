@@ -35,6 +35,7 @@ public class Tools {
         Pattern p = Pattern.compile(regex);
         //创建Matcher对象
         Elements timelineService = page.getElementsByAttributeValue(attributeKey,attributeValue);
+
         Matcher m = p.matcher(timelineService.toString());
         if(m.find()) {  //该方法扫描输入的序列，查找与该模式匹配的一个子序列
             result=m.group();

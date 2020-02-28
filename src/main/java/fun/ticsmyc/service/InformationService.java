@@ -50,10 +50,17 @@ public class InformationService {
         try{
             staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
             statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
-        }catch(JSONException e ){
+        }catch(Exception e1 ){
             logger.error("static信息正则1匹配失败，切换正则2");
-            staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
-            statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+            try{
+                staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
+                statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+            }catch(Exception e2){
+                logger.error("static信息正则2匹配失败，切换正则3");
+                staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_3,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
+                statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+            }
+
         }
 
         //数据持久化
