@@ -1,6 +1,5 @@
 package fun.ticsmyc.service;
 
-import com.alibaba.fastjson.JSONException;
 import fun.ticsmyc.crawler.Crawler;
 import fun.ticsmyc.crawler.Parse;
 import fun.ticsmyc.crawler.Tools;
@@ -38,41 +37,41 @@ public class InformationService {
         this.informationDao = new InformationDao();
     }
 
-    public void getNews(){
+    public void getNews() {
         //获取HTML数据
         Tools.getPageByJSoup(Crawler.URL);
 
         //提取static信息的json数据
 
-        String staticInformation=null;
+        String staticInformation = null;
         //解析static信息的json数据
-        Statistics statisticsInformation=null;
-        try{
-            staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
-            statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
-        }catch(Exception e1 ){
+        Statistics statisticsInformation = null;
+        try {
+            staticInformation = Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1, "id", Crawler.STATIC_INFORMATION_ATTRIBUTE);
+            statisticsInformation = Parse.parseStatisticsInformation(staticInformation);
+        } catch (Exception e1) {
             logger.error("static信息正则1匹配失败，切换正则2");
-            try{
-                staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
-                statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
-            }catch(Exception e2){
+            try {
+                staticInformation = Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_2, "id", Crawler.STATIC_INFORMATION_ATTRIBUTE);
+                statisticsInformation = Parse.parseStatisticsInformation(staticInformation);
+            } catch (Exception e2) {
                 logger.error("static信息正则2匹配失败，切换正则3");
-                staticInformation=Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_3,"id",Crawler.STATIC_INFORMATION_ATTRIBUTE);
-                statisticsInformation= Parse.parseStatisticsInformation(staticInformation);
+                staticInformation = Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_3, "id", Crawler.STATIC_INFORMATION_ATTRIBUTE);
+                statisticsInformation = Parse.parseStatisticsInformation(staticInformation);
             }
 
         }
 
         //数据持久化
-        String timeLineNews =null;
-        String provinceNews=null;
+        String timeLineNews = null;
+        String provinceNews = null;
         String statisticsNews = informationDao.insertStatistics(statisticsInformation);
 
-        if (statisticsNews != null){
+        if (statisticsNews != null) {
             //总数据发生变化，各省数据更新
-      //提取其他信息的json数据
-            String timelineServiceInformation= Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE,"id",Crawler.TIME_LINE_ATTRIBUTE);
-            String areaInformation=Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE,"id",Crawler.AREA_INFORMATION_ATTRIBUTE);
+            //提取其他信息的json数据
+            String timelineServiceInformation = Tools.getInformation(Crawler.TIME_LINE_REGEX_TEMPLATE, "id", Crawler.TIME_LINE_ATTRIBUTE);
+            String areaInformation = Tools.getInformation(Crawler.AREA_INFORMATION_REGEX_TEMPLATE, "id", Crawler.AREA_INFORMATION_ATTRIBUTE);
             //解析
             List<TimeLine> timeLineList = Parse.parseTimeLineInformation(timelineServiceInformation);
             List<AreaStat> areaStatList = Parse.parseAreaInformation(areaInformation);
@@ -80,18 +79,18 @@ public class InformationService {
             timeLineNews = informationDao.insertTimeLine(timeLineList);
             provinceNews = informationDao.insertProvince(areaStatList);
 
-            sendEmail(timeLineNews,provinceNews,statisticsNews);
+            sendEmail(timeLineNews, provinceNews, statisticsNews);
         }
 
         informationDao.destory();
     }
 
-    public void sendEmail(String timeLineNews,String provinceNews,String statisticsNews) {
+    public void sendEmail(String timeLineNews, String provinceNews, String statisticsNews) {
         //读取收件人列表
         Properties properties = null;
         List<String> toEmailList = null;
         ClassLoader classLoader = getClass().getClassLoader();
-        if(classLoader != null){
+        if (classLoader != null) {
             URL toEmailFile = classLoader.getResource("emailReceiver.properties");
             properties = new Properties();
             try {
@@ -108,25 +107,25 @@ public class InformationService {
         }
 
         //邮件通知
-        StringBuilder emailContent=new StringBuilder();
-        if(timeLineNews!=null && timeLineNews.length()!=0){
+        StringBuilder emailContent = new StringBuilder();
+        if (timeLineNews != null && timeLineNews.length() != 0) {
             emailContent.append("----------------------新闻--------------------<br/>");
             emailContent.append(timeLineNews);
         }
-        if(statisticsNews.length()!=0){
+        if (statisticsNews.length() != 0) {
             emailContent.append("----------------------总人数-------------------<br/>");
             emailContent.append(statisticsNews);
         }
-        if(provinceNews!= null && provinceNews.length()!=0){
+        if (provinceNews != null && provinceNews.length() != 0) {
             emailContent.append("---------------------各省变化-------------------<br/>");
             emailContent.append(provinceNews);
         }
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
-            if(toEmailList!= null){
-                for(String toUserEmail : toEmailList){
-                    if(!toUserEmail .equals("") ){
-                        EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"),toUserEmail,dateFormat.format(new Date())+"疫情动态",emailContent.toString());
+            if (toEmailList != null) {
+                for (String toUserEmail : toEmailList) {
+                    if (!toUserEmail.equals("")) {
+                        EmailUtil.sendEmail((String) properties.get("email.authCode"), (String) properties.get("email.fromEmail"), toUserEmail, dateFormat.format(new Date()) + "疫情动态", emailContent.toString());
                         Thread.sleep(5000);
                     }
                 }
@@ -139,8 +138,4 @@ public class InformationService {
             logger.error("邮件发送失败");
         }
     }
-
-
-
-
 }

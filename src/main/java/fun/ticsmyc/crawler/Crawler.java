@@ -1,7 +1,7 @@
 package fun.ticsmyc.crawler;
 
 /**
- * 数据源URL 和 获取到的JSON数据
+ * 数据源URL
  *
  * @author Ticsmyc
  * @package fun.ticsmyc
@@ -14,7 +14,8 @@ public class Crawler {
      * 时间线新闻
      */
     public static final String TIME_LINE_REGEX_TEMPLATE = "\\[(.*?)\\]";
-    public static final String TIME_LINE_ATTRIBUTE="getTimelineService";
+//    public static final String TIME_LINE_ATTRIBUTE="getTimelineService";
+    public static final String TIME_LINE_ATTRIBUTE="getTimelineServiceundefined";
     /**
      * 各省信息
      */
@@ -25,7 +26,7 @@ public class Crawler {
      */
     public static final String STATIC_INFORMATION_REGEX_TEMPLATE_2="\\{(\"id\".*?)\\}\\]\\}";
     public static final String STATIC_INFORMATION_REGEX_TEMPLATE_3="\\{(\"id\".*?)\\}\\}";
-    public static final String STATIC_INFORMATION_REGEX_TEMPLATE_1="\\{\"id\"(.*?\\}){27}";
+    public static final String STATIC_INFORMATION_REGEX_TEMPLATE_1="\\{\"id\"(.*?\\}){38}";
     public static final String STATIC_INFORMATION_ATTRIBUTE="getStatisticsService";
 
 }
