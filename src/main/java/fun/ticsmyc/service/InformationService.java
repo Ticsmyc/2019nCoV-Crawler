@@ -48,6 +48,9 @@ public class InformationService {
         Statistics statisticsInformation = null;
         try {
             staticInformation = Tools.getInformation(Crawler.STATIC_INFORMATION_REGEX_TEMPLATE_1, "id", Crawler.STATIC_INFORMATION_ATTRIBUTE);
+            //去掉static数据正则1匹配最后的 }catch(e){}串， 剩下的就是一个格式正确的json串了
+            staticInformation = staticInformation.replace("}catch(e){}","");
+            System.out.println(staticInformation);
             statisticsInformation = Parse.parseStatisticsInformation(staticInformation);
         } catch (Exception e1) {
             logger.error("static信息正则1匹配失败，切换正则2");
