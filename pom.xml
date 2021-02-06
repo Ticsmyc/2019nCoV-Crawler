@@ -1,127 +1,131 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>fun.ticsmyc</groupId>
-  <artifactId>2019nCoV</artifactId>
-  <version>1.0-SNAPSHOT</version>
-
-  <name>2019nCoV</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-  </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jsoup</groupId>
-      <artifactId>jsoup</artifactId>
-      <version>1.12.1</version>
-    </dependency>
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.47</version>
-    </dependency>
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.3.0</version>
-    </dependency>
-
-    <dependency>
-      <groupId>log4j</groupId>
-      <artifactId>log4j</artifactId>
-      <version>1.2.17</version>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.16</version>
-    </dependency>
-    <!--邮件相关-->
-    <dependency >
-      <groupId >javax.mail </groupId >
-      <artifactId >mail </artifactId >
-      <version >1.4.5 </version >
-    </dependency >
-    <dependency >
-      <groupId >com.sun.mail </groupId >
-      <artifactId >javax.mail </artifactId >
-      <version >1.5.4 </version >
-    </dependency >
-    <dependency>
-      <groupId>commons-io</groupId>
-      <artifactId>commons-io</artifactId>
-      <version>2.4</version>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
-      <scope>compile</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <!-- <version>3.7</version> 默认用最新的-->
-        <configuration>
-          <source>8</source>
-          <target>8</target>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2.1</version>
-        <configuration>
-          <archive>
-            <manifest>
-              <mainClass>fun.ticsmyc.main.Main</mainClass>
-            </manifest>
-          </archive>
-          <descriptorRefs>
-            <descriptorRef>jar-with-dependencies</descriptorRef>
-          </descriptorRefs>
-        </configuration>
-        <executions>
-          <execution>
-            <id>make-assembly</id>
-            <phase>package</phase>
-            <goals>
-              <goal>single</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-
-    </plugins>
-    <resources>
-      <resource>
-        <directory>${basedir}/src/main/java</directory>
-        <includes>
-          <include>**/*.xml</include>
-          <include>**/*.properties</include>
-        </includes>
-      </resource>
-    </resources>
-
-  </build>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">  
+  <modelVersion>4.0.0</modelVersion>  
+  <groupId>fun.ticsmyc</groupId>  
+  <artifactId>2019nCoV</artifactId>  
+  <version>1.0-SNAPSHOT</version>  
+  <name>2019nCoV</name>  
+  <!-- FIXME change it to the project's website -->  
+  <url>http://www.example.com</url>  
+  <properties> 
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
+    <maven.compiler.source>1.7</maven.compiler.source>  
+    <maven.compiler.target>1.7</maven.compiler.target> 
+  </properties>  
+  <dependencies> 
+    <dependency> 
+      <groupId>junit</groupId>  
+      <artifactId>junit</artifactId>  
+      <version>4.11</version>  
+      <scope>test</scope> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.jsoup</groupId>  
+      <artifactId>jsoup</artifactId>  
+      <version>1.12.1</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>com.alibaba</groupId>  
+      <artifactId>fastjson</artifactId>  
+      <version>1.2.47</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>org.mybatis</groupId>  
+      <artifactId>mybatis</artifactId>  
+      <version>3.3.0</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>log4j</groupId>  
+      <artifactId>log4j</artifactId>  
+      <version>1.2.17</version> 
+    </dependency>  
+    <dependency> 
+      <groupId>mysql</groupId>  
+      <artifactId>mysql-connector-java</artifactId>  
+      <version>8.0.16</version> 
+    </dependency>  
+    <!--邮件相关-->  
+    <dependency> 
+      <groupId>com.sun.mail</groupId>  
+      <artifactId>javax.mail</artifactId>  
+      <version>1.5.4</version>  
+      <exclusions> 
+        <exclusion> 
+          <groupId>javax.activation</groupId>  
+          <artifactId>activation</artifactId> 
+        </exclusion> 
+      </exclusions> 
+    </dependency>  
+    <dependency> 
+      <groupId>commons-io</groupId>  
+      <artifactId>commons-io</artifactId>  
+      <version>2.4</version> 
+    </dependency> 
+  </dependencies>  
+  <build> 
+    <plugins> 
+      <plugin> 
+        <groupId>org.apache.maven.plugins</groupId>  
+        <artifactId>maven-compiler-plugin</artifactId>  
+        <!-- <version>3.7</version> 默认用最新的-->  
+        <configuration> 
+          <source>8</source>  
+          <target>8</target> 
+        </configuration> 
+      </plugin>  
+      <plugin> 
+        <groupId>org.apache.maven.plugins</groupId>  
+        <artifactId>maven-assembly-plugin</artifactId>  
+        <version>2.2.1</version>  
+        <configuration> 
+          <archive> 
+            <manifest> 
+              <mainClass>fun.ticsmyc.main.Main</mainClass> 
+            </manifest> 
+          </archive>  
+          <descriptorRefs> 
+            <descriptorRef>jar-with-dependencies</descriptorRef> 
+          </descriptorRefs> 
+        </configuration>  
+        <executions> 
+          <execution> 
+            <id>make-assembly</id>  
+            <phase>package</phase>  
+            <goals> 
+              <goal>single</goal> 
+            </goals> 
+          </execution> 
+        </executions> 
+      </plugin> 
+    </plugins>  
+    <resources> 
+      <resource> 
+        <directory>${basedir}/src/main/java</directory>  
+        <includes> 
+          <include>**/*.xml</include>  
+          <include>**/*.properties</include> 
+        </includes> 
+      </resource> 
+    </resources> 
+  </build>  
+  <dependencyManagement> 
+    <dependencies> 
+      <dependency> 
+        <groupId>org.junit.jupiter</groupId>  
+        <artifactId>junit-jupiter-api</artifactId>  
+        <version>5.7.1</version> 
+      </dependency>  
+      <dependency> 
+        <groupId>org.junit.jupiter</groupId>  
+        <artifactId>junit-jupiter-params</artifactId>  
+        <version>5.7.1</version> 
+      </dependency>  
+      <dependency> 
+        <groupId>org.junit.jupiter</groupId>  
+        <artifactId>junit-jupiter-engine</artifactId>  
+        <version>5.7.1</version> 
+      </dependency> 
+    </dependencies> 
+  </dependencyManagement> 
 </project>
